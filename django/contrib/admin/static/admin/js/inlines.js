@@ -53,6 +53,7 @@
 				addButton = $(this).filter(":last").next().find("a");
 			}
 			addButton.click(function(e) {
+				e.preventDefault();
 				var totalForms = $("#id_" + options.prefix + "-TOTAL_FORMS");
 				var template = $("#" + options.prefix + "-empty");
 				var row = template.clone(true);
@@ -86,6 +87,7 @@
 				}
 				// The delete button of each row triggers a bunch of other things
 				row.find("a." + options.deleteCssClass).click(function(e) {
+					e.preventDefault();
 					// Remove the parent form containing this button:
 					var row = $(this).parents("." + options.formCssClass);
 					row.remove();
@@ -110,13 +112,11 @@
 							updateElementIndex(this, options.prefix, i);
 						});
 					}
-					e.preventDefault();
 				});
 				// If a post-add callback was supplied, call it with the added form:
 				if (options.added) {
 					options.added(row);
 				}
-				e.preventDefault();
 			});
 		}
 		return this;
